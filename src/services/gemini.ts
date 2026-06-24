@@ -12,6 +12,8 @@ async function getGeminiResponse(prompt: string): Promise<any> {
       contents: prompt,
     });
 
+    console.log("Gemini Response:", response.text);
+
     return response.text;
 }
 

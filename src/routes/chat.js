@@ -1,9 +1,10 @@
 import router from 'express';
 import { getGeminiResponse } from '../services/gemini.ts';
+import { getGroqResponse } from '../services/groq.ts';
 
 const chatRouter = router();
 
-chatRouter.post('/chat', (req, res) => {
+chatRouter.post('/chat', async (req, res) => {
     try {
         const { prompt } = req.body;
 
@@ -11,9 +12,10 @@ chatRouter.post('/chat', (req, res) => {
             return res.status(400).json({ error: 'Prompt is required' });
         }
 
-        const geminiResponse = getGeminiResponse(prompt);
+        // const geminiResponse = getGeminiResponse(prompt);
+        const groqResponse = await getGroqResponse(prompt);
 
-        return res.status(200).json({ response: geminiResponse });
+        return res.status(200).json({ response: groqResponse });
 
     } catch (error) {
         console.log("Got the error", error);
