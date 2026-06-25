@@ -1,9 +1,11 @@
 import express from 'express';
 import chatRouter from './src/routes/chat.js';
+import cors from 'cors';
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 // middleware to log the requests on the backend.
 app.use((req, res, next) => {
