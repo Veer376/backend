@@ -3,7 +3,7 @@ import Groq from "groq-sdk";
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 
-export async function getGroqResponse(messages: any): Promise<any> {
+export async function getGroqResponse(messages: any, model: string): Promise<any> {
 
   const contents = []
 
@@ -16,7 +16,7 @@ export async function getGroqResponse(messages: any): Promise<any> {
 
   const groqChoices = await groq.chat.completions.create({
     messages: contents,
-    model: "llama-3.3-70b-versatile",
+    model: model
   });
 
   const content = groqChoices.choices[0].message.content;
