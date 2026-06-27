@@ -6,8 +6,6 @@ const chatRouter = router();
 
 chatRouter.post('/chat', async (req, res) => {
     try {
-        throw new Error("getGroqResponse function is not implemented yet.");
-        
         const { messages, model } = req.body;
 
         if (!messages || messages.length === 0) {
