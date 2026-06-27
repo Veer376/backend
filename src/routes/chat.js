@@ -6,14 +6,13 @@ const chatRouter = router();
 
 chatRouter.post('/chat', async (req, res) => {
     try {
-        const { prompt } = req.body;
+        const { messages } = req.body;
 
-        if (!prompt) {
-            return res.status(400).json({ error: 'Prompt is required' });
+        if (!messages || messages.length === 0) {
+            return res.status(400).json({ error: 'messages is required' });
         }
 
-        // const geminiResponse = getGeminiResponse(prompt);
-        const groqResponse = await getGroqResponse(prompt);
+        const groqResponse = await getGroqResponse(messages);
 
         return res.status(200).json({ response: groqResponse });
 

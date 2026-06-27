@@ -3,15 +3,19 @@ import Groq from "groq-sdk";
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 
-export async function getGroqResponse(prompt: string): Promise<any> {
+export async function getGroqResponse(messages: any): Promise<any> {
+
+  const contents = []
+
+  for (const message of messages) {
+    contents.push({
+      role: message.role,
+      content: message.content
+    })
+  }
 
   const groqChoices = await groq.chat.completions.create({
-    messages: [
-      {
-        role: "user",
-        content: prompt,
-      },
-    ],
+    messages: contents,
     model: "llama-3.3-70b-versatile",
   });
 
