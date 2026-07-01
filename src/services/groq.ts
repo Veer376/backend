@@ -42,7 +42,7 @@ export async function getGroqStreamResponse(messages: any, model: string, onMess
   });
 
   for await (const event of stream) {
-    console.log("Groq Stream Event:", event);
+    // console.log("Groq Stream Event:", event);
     onMessage(event.choices[0]?.delta?.content || "");
   }
 
