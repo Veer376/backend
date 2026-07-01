@@ -1,5 +1,6 @@
 import express from 'express';
 import chatRouter from './src/routes/chat.js';
+import documentRouter from './src/routes/document.js';
 import cors from 'cors';
 
 const app = express();
@@ -15,6 +16,7 @@ app.use((req, res, next) => {
 
 
 app.use(chatRouter);
+app.use(documentRouter);
 
 
 app.get('/', (req, res) => {
